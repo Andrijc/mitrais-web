@@ -83,19 +83,24 @@ class Register extends React.Component {
 
         // console.log(this.state);
 
-        if (this.state.users !== {}) {
-            for (let user of this.state.users.data) {
-                // console.log(user);
-                if (user.mobileNumber === this.state.mobileNumber) {
+        // if (this.state.users !== {}) {
+        //     for (let user of this.state.users.data) {
+        //         // console.log(user);
+        //         if (user.mobileNumber === this.state.mobileNumber) {
 
-                    mobileNumberError = "Please enter an unique number. The number is already exist.";
-                }
-            }
-        }
+        //             mobileNumberError = "Please enter an unique number. The number is already exist.";
+        //         }
+        //     }
+        // }
 
         if (!this.state.mobileNumber) {
             mobileNumberError = "Please enter an Indonesian mobile number";
         }
+        
+        else if (this.state.mobileNumber && !this.state.mobileNumber.includes("+62") ) {
+            mobileNumberError = "Please enter valid Indonesian mobile number. Begin with +62.";
+        }
+
         if (!this.state.firstName) {
             firstNameError = "Please enter the first name";
         }
@@ -107,14 +112,14 @@ class Register extends React.Component {
             emailError = "Please enter a valid email address";
         }
 
-        if (this.state.users !== {}) {
-            for (let user of this.state.users.data) {
-                // console.log(this.state.users.data[user]['email']);
-                if (user.email === this.state.email) {
-                    emailError = "Please enter an unique email. The email is already exist.";
-                }
-            }
-        }
+        // if (this.state.users !== {}) {
+        //     for (let user of this.state.users.data) {
+        //         // console.log(this.state.users.data[user]['email']);
+        //         if (user.email === this.state.email) {
+        //             emailError = "Please enter an unique email. The email is already exist.";
+        //         }
+        //     }
+        // }
         if (mobileNumberError || emailError || firstNameError || lastNameError) {
             this.setState({ mobileNumberError, firstNameError, lastNameError, emailError });
             return false;
@@ -131,7 +136,7 @@ class Register extends React.Component {
                 dob: dob
             });
 
-            console.log(dob);
+            // console.log(dob);
         }
 
         const isValid = this.validate();
